@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+<title>Employee Reimbursments</title>
+</head>
+<body>
+<h1><center>Hello! Welcome to the employee reimbursments page. In order to proceed, please login, or try to make a account. </center></h1>
+
+<form id="frm1" action="/action_page.php">
+  User name: <input type="text" name="username"><br>
+  Password: <input type="text" name="password"><br><br>
+</form> 
+
+<button onclick="myFunction()">Log in</button>
+
+<script>
+	function myFunction(){ 
+    	var x = document.getElementById("frm1");
+    	var username = x.elements[0].value;
+    	var password = x.elements[1].value;
+    	$.post('api', "{\"empid\":0, \"username\": \"" + username + "\", \"password\": \"" + password + "\" }",function(data){ 
+    	var mydata = JSON.parse(data);
+    	if(mydata.empid == 0)
+    		{
+    			alert("invalid login");
+    		    location.reload();
+    		}
+    	else
+    		alert("succesful login!");
+	    	window.location.href = "http://localhost:8080/test.tomcat/reimburse.html";
+    	} 
+    );
+    };
+    
+
+</script>
+
+</body>
+
+</html>

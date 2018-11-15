@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<title>Make new reimbursment</title>
+</head>
+<body>
+
+<form id="frm1" action="/action_page.php">
+  Amount to be reimbursed: <input type="text" name="amount"><br>
+</form> 
+
+<button onclick="myFunction()">submit</button>
+
+
+<script type="text/javascript">
+function myFunction(){ 
+	var x = document.getElementById("frm1");
+	var amount = x.elements[0].value;
+	$.post('apa', "{\"userid\":0, \"amount\": " + amount + ", \"approver\":0, \"adp\":\"p\" }",function(data){ 
+	var mydata = JSON.parse(data);
+	if(mydata = "error")
+		{
+			alert("invalid submission");
+		    location.reload();
+		}
+	else{
+		alert("succesful submission!");
+    	window.location.href = "http://localhost:8080/test.tomcat/index.html";
+	}
+	}
+);
+};
+</script>
+
+</body>
+</html>
